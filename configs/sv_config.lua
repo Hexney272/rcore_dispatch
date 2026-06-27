@@ -18,7 +18,7 @@ SV_CONFIG.ItemToUseRefs = 'gps'       -- The item to use the refs
 SV_CONFIG.Logs = {
     enabled = true,
     webhook =
-    'https://discord.com/api/webhooks/1290472764162965505/vlsBTXZD3EPenht4DyyB6bAV21OJIrMOSrPau3PFdiUWdzqVqi__rwsIAZKtLfrS7cCg',
+    '',  -- REPLACE WITH YOUR OWN WEBHOOK
     actions = {
         alert = 'The user sent the following alert: **__ %s __**',
         unit_changed = 'The user changed their unit to **__ %s __**',

@@ -169,7 +169,7 @@ CL_CONFIG.EnableTimeAgo = false       -- Enable the time ago in the alerts
 -- This webhook is not a problem for hackers, as it is an irrelevant webhook used to uploading pictures.
 -- You can use this webhook or use your own webhook (if you use your own, create an special channel for it and mute it)
 CL_CONFIG.CarRobberyPictureWebhook =
-'https://discord.com/api/webhooks/1290472764162965505/vlsBTXZD3EPenht4DyyB6bAV21OJIrMOSrPau3PFdiUWdzqVqi__rwsIAZKtLfrS7cCg'
+''  -- REPLACE WITH YOUR OWN WEBHOOK - Do not expose webhooks in client-side code
 
 
 

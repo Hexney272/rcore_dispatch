@@ -84,29 +84,14 @@ local function loadConfig()
         if v.enabled then
             if command_type == 'toggle_switchboard' then
                 RegisterCommand(v.command, function(source, args, rawCommand)
-                    if GetResourceState('ep_essentials') == 'started' then
-                        local success, isOpen = pcall(function() return exports["ep_essentials"]:isElectronicOpen() end)
-                        if success and isOpen then return end
-                    end
-
                     ToggleSwitchboard()
                 end)
             elseif command_type == 'open_nui_map' then
                 RegisterCommand(v.command, function(source, args, rawCommand)
-                    if GetResourceState('ep_essentials') == 'started' then
-                        local success, isOpen = pcall(function() return exports["ep_essentials"]:isElectronicOpen() end)
-                        if success and isOpen then return end
-                    end
-
                     OpenNuiMap()
                 end)
             elseif command_type == 'switchboard_config' then
                 RegisterCommand(v.command, function(source, args, rawCommand)
-                    if GetResourceState('ep_essentials') == 'started' then
-                        local success, isOpen = pcall(function() return exports["ep_essentials"]:isElectronicOpen() end)
-                        if success and isOpen then return end
-                    end
-
                     OpenSwitchBoardConfig()
                 end)
             end

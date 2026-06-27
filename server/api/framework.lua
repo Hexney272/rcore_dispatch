@@ -75,7 +75,10 @@ local function loadESX()
         end
     end)
     RegisterNetEvent('esx:setJob') -- The stored data does not sync with the framework unless we tell it to
-    AddEventHandler('esx:setJob', function(playerId, job)
+    AddEventHandler('esx:setJob', function(playerId, job, lastJob)
+        if not playerId then
+            playerId = source
+        end
         if not playerId then return end
         if job then
             if CONFIG.JOBS[job.name] then
@@ -98,6 +101,10 @@ local function loadQBCORE()
             Wait(5)
             attempts = attempts + 1
             qbPlayer = QBCore.Functions.GetPlayer(tonumber(source))
+        end
+        if not qbPlayer then
+            dbg.error('QBCore player not found for source: ' .. tostring(source))
+            return nil
         end
         ---------
         xPlayer.identifier = qbPlayer.PlayerData.citizenid
@@ -170,17 +177,17 @@ local function loadQBCORE()
         CreateThread(function()
             Wait(1500)
             local player = QBCore.Functions.GetPlayer(playerId)
+            if not player then return end
             local job = player.PlayerData.job
+            if not job then return end
             local name = job.name
             if not job.onduty then
                 name = job.name .. '_offduty'
             end
-            if job then
-                if CONFIG.JOBS[name] then
-                    LoadPlayer(playerId, name)
-                else
-                    UnloadPlayer(playerId, name)
-                end
+            if CONFIG.JOBS[name] then
+                LoadPlayer(playerId, name)
+            else
+                UnloadPlayer(playerId, name)
             end
         end)
     end)
@@ -188,14 +195,15 @@ local function loadQBCORE()
     AddEventHandler('rcore_dispatch:server:loadClient', function()
         local playerId = source
         local player = QBCore.Functions.GetPlayer(playerId)
+        if not player then return dbg.critical('No player found for source ' .. playerId) end
         local job = player.PlayerData.job
+        if not job then return dbg.critical('No job detected in player with id ' .. playerId) end
         local name = job.name
         if not job.onduty then
             name = job.name .. '_offduty'
         end
-        if not job then return dbg.critical('No job detected in player with id ' .. source) end
         if CONFIG.JOBS[name] then
-            LoadPlayer(source, name)
+            LoadPlayer(playerId, name)
         end
     end)
 end
